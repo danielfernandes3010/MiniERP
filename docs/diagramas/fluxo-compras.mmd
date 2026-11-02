@@ -1,0 +1,16 @@
+flowchart TD
+  A[Cadastro de fornecedor e produtos] --> B[Criar pedido como rascunho]
+  B --> C{Validar fornecedor, produtos e valores}
+  C -->|Inválido| B
+  C -->|Válido| D[Confirmar pedido]
+  D --> E[Pedido EM_ABERTO]
+  E --> F[Registrar entrada com chave idempotente]
+  F --> G{Quantidade válida e pendente?}
+  G -->|Não| F
+  G -->|Sim| H[Gravar entrada e itens]
+  H --> I[Atualizar saldo e registrar movimentações]
+  I --> J[Atualizar quantidades recebidas e status do pedido]
+  J --> K[Gerar título pelo valor recebido]
+  K --> L{Ainda há quantidade pendente?}
+  L -->|Sim| E
+  L -->|Não| M[Pedido RECEBIDO]

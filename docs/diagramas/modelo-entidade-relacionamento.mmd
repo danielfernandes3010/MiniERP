@@ -1,0 +1,108 @@
+erDiagram
+    FORNECEDORES ||--o{ PEDIDOS_COMPRA : realiza
+    PEDIDOS_COMPRA ||--|{ ITENS_PEDIDO : contem
+    PRODUTOS ||--o{ ITENS_PEDIDO : solicitado_em
+    PEDIDOS_COMPRA ||--o{ ENTRADAS_ESTOQUE : recebe
+    ENTRADAS_ESTOQUE ||--|{ ITENS_ENTRADA : contem
+    ITENS_PEDIDO ||--o{ ITENS_ENTRADA : recebido_de
+    PRODUTOS ||--o| SALDOS_ESTOQUE : possui
+    PRODUTOS ||--o{ MOVIMENTACOES_ESTOQUE : movimenta
+    ENTRADAS_ESTOQUE ||--o{ MOVIMENTACOES_ESTOQUE : origina
+    FORNECEDORES ||--o{ TITULOS_PAGAR : credor
+    PEDIDOS_COMPRA ||--o{ TITULOS_PAGAR : origem
+    ENTRADAS_ESTOQUE ||--o| TITULOS_PAGAR : gera
+    TITULOS_PAGAR ||--o{ BAIXAS_TITULO : recebe
+
+    FORNECEDORES {
+        INTEGER id PK
+        TEXT codigo UK
+        TEXT razao_social
+        TEXT nome_fantasia
+        TEXT cpf_cnpj UK
+        TEXT email
+        INTEGER ativo
+    }
+    PRODUTOS {
+        INTEGER id PK
+        TEXT codigo UK
+        TEXT descricao
+        TEXT categoria
+        TEXT unidade_medida
+        INTEGER preco_referencia_centavos
+        INTEGER estoque_minimo_milesimos
+        INTEGER ativo
+    }
+    PEDIDOS_COMPRA {
+        INTEGER id PK
+        TEXT numero UK
+        INTEGER fornecedor_id FK
+        TEXT data_emissao
+        TEXT previsao_entrega
+        INTEGER prazo_pagamento_dias
+        INTEGER valor_total_centavos
+        TEXT status
+    }
+    ITENS_PEDIDO {
+        INTEGER id PK
+        INTEGER pedido_id FK
+        INTEGER produto_id FK
+        INTEGER quantidade_solicitada_milesimos
+        INTEGER quantidade_recebida_milesimos
+        INTEGER valor_unitario_centavos
+        INTEGER valor_total_centavos
+    }
+    ENTRADAS_ESTOQUE {
+        INTEGER id PK
+        TEXT numero UK
+        INTEGER pedido_id FK
+        TEXT data_entrada
+        INTEGER valor_total_centavos
+        TEXT chave_idempotencia UK
+    }
+    ITENS_ENTRADA {
+        INTEGER id PK
+        INTEGER entrada_id FK
+        INTEGER item_pedido_id FK
+        INTEGER quantidade_recebida_milesimos
+        INTEGER valor_unitario_centavos
+        INTEGER valor_total_centavos
+    }
+    SALDOS_ESTOQUE {
+        INTEGER id PK
+        INTEGER produto_id FK, UK
+        INTEGER quantidade_atual_milesimos
+        INTEGER versao
+        TEXT atualizado_em
+    }
+    MOVIMENTACOES_ESTOQUE {
+        INTEGER id PK
+        INTEGER produto_id FK
+        INTEGER entrada_id FK
+        TEXT tipo_movimentacao
+        INTEGER quantidade_milesimos
+        INTEGER saldo_anterior_milesimos
+        INTEGER saldo_posterior_milesimos
+        INTEGER valor_movimentacao_centavos
+        TEXT data_movimentacao
+    }
+    TITULOS_PAGAR {
+        INTEGER id PK
+        TEXT numero UK
+        INTEGER fornecedor_id FK
+        INTEGER pedido_id FK
+        INTEGER entrada_id FK, UK
+        TEXT data_emissao
+        TEXT data_vencimento
+        INTEGER valor_original_centavos
+        INTEGER valor_pago_centavos
+        INTEGER saldo_aberto_centavos
+        TEXT status
+    }
+    BAIXAS_TITULO {
+        INTEGER id PK
+        INTEGER titulo_id FK
+        TEXT data_pagamento
+        INTEGER valor_pago_centavos
+        TEXT forma_pagamento
+        TEXT chave_idempotencia UK
+    }

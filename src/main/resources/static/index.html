@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12304a">
+  <title>Gestão integrada | MiniERP</title>
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#dashboard"><span class="brand-mark">M</span><span>MiniERP<small>Gestão integrada</small></span></a>
+      <nav>
+        <p class="nav-caption">OPERAÇÃO</p>
+        <a href="#dashboard" data-view="dashboard">▦ <span>Dashboard</span></a>
+        <a href="#fornecedores" data-view="fornecedores">♙ <span>Fornecedores</span></a>
+        <a href="#produtos" data-view="produtos">▣ <span>Produtos</span></a>
+        <a href="#pedidos" data-view="pedidos">▤ <span>Pedidos de compra</span></a>
+        <a href="#entradas" data-view="entradas">⇩ <span>Entradas</span></a>
+        <a href="#estoque" data-view="estoque">▥ <span>Estoque</span></a>
+        <p class="nav-caption">FINANCEIRO</p>
+        <a href="#titulos" data-view="titulos">◷ <span>Contas a pagar</span></a>
+        <a href="#relatorios" data-view="relatorios">▧ <span>Relatórios</span></a>
+      </nav>
+      <div class="sidebar-footer">Compras · Estoque · Financeiro</div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><button class="menu-toggle" aria-label="Abrir menu">☰</button><div><span class="eyebrow">SISTEMA DE GESTÃO</span><h1 id="page-title">Dashboard</h1></div><span class="top-pill">Operação local</span></header>
+      <section id="content" class="content" aria-live="polite"><div class="loading">Carregando dados...</div></section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="modal" class="modal"><div class="modal-head"><h2 id="modal-title"></h2><button type="button" class="icon-button" data-close aria-label="Fechar">×</button></div><div id="modal-content" class="modal-content"></div></dialog>
+</body>
+</html>

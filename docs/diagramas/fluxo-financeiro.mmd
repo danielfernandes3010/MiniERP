@@ -1,0 +1,13 @@
+flowchart TD
+  A[Entrada de estoque confirmada] --> B[Gerar título pelo valor da entrada]
+  B --> C[EM_ABERTO: saldo igual ao original]
+  C --> D[Registrar baixa idempotente]
+  D --> E{Pagamento positivo e menor ou igual ao saldo?}
+  E -->|Não| D
+  E -->|Sim| F[Atualizar valor pago e saldo]
+  F --> G{Saldo em aberto é zero?}
+  G -->|Sim| H[QUITADO]
+  G -->|Não| I[PARCIALMENTE_PAGO]
+  I --> D
+  C -. vencimento anterior à data atual .-> J[Indicador VENCIDO calculado]
+  I -. saldo e vencimento atrasados .-> J
