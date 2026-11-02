@@ -297,6 +297,3 @@ Os testes utilizam JUnit 5, Mockito e Spring Boot Test. Os testes unitários cob
 
 Não há autenticação, integração bancária ou fiscal, NF-e, vendas/saídas, múltiplos armazéns, parcelamento de títulos, nem integração direta com o Protheus. A aplicação é uma simulação acadêmica focada no fluxo de compras, recebimento e pagamento.
 
-## Portfólio
-
-Descrições para GitHub, LinkedIn e currículo estão em [docs/portfolio.md](docs/portfolio.md).
